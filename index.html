@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PARCERO 117 - PS1</title>
+    <style>
+        /* Estilo tipo consola de Diego Alejandro Hernández Navarro */
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            border-bottom: 3px solid #003791;
+            width: 90%;
+            max-width: 500px;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 20px;
+            letter-spacing: 2px;
+            color: #00d2ff;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 85%;
+            max-width: 400px;
+        }
+
+        button {
+            background: linear-gradient(90deg, #1a1a1a 0%, #333 100%);
+            color: #eee;
+            border: 1px solid #444;
+            padding: 18px 20px;
+            font-size: 16px;
+            text-align: left;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        /* Efecto al pulsar en celular o PC */
+        button:active {
+            background: #003791;
+            border-color: #00d2ff;
+            transform: scale(0.97);
+        }
+
+        button::after {
+            content: "▶";
+            font-size: 12px;
+            color: #00d2ff;
+        }
+
+        #game-container { 
+            width: 100vw; 
+            height: 100vh; 
+            display: none; 
+            background: #000;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 10px;
+            color: #444;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="selector-menu" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <div class="header">
+            <h1>PARCERO 117 - PLAY STATION 1</h1>
+        </div>
+
+        <div class="menu-list">
+            <button onclick="iniciar('rooms/Disney Tarzan (Spain).cue')">JUGAR DISNEY TARZÁN</button>
+            <button onclick="iniciar('rooms/InuYasha - A Feudal Fairy Tale (v1.1).cue')">JUGAR INUYASHA</button>
+        </div>
+
+        <div class="footer">
+            EmulatorJS | Diego Alejandro Hernández Navarro
+        </div>
+    </div>
+
+    <div id="game-container"></div>
+
+    <script src="data/loader.js"></script>
+    <script>
+        function iniciar(ruta) {
+            // Ocultamos el menú y mostramos el juego
+            document.getElementById('selector-menu').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+
+            // Configuración del motor PS1
+            EmuJS.setup({
+                container: "game-container",
+                gameUrl: ruta,
+                core: "ps1",
+                biosUrl: "data/system/scph5501.bin", // La BIOS que ya renombraste
+                active: true
+            });
+        }
+    </script>
+</body>
+</html>
